@@ -4,6 +4,11 @@
 
 #import csv for reader
 import csv
+#import os to enable clearing of the console
+import os
+
+#initially clear console to get rid of top text from program opening
+os.system('cls')
 
 #initially read file
 header = []
@@ -28,6 +33,8 @@ while (loop):
     if command == "exit":
         loop=False
     elif command == "addMovie":
+        #clear console
+        os.system('cls')
         #Prompt for new movie details
         newName = input("Type movie name to Add: ")
         newDirector = input("Type the Director for " + newName + ": ")
@@ -41,7 +48,9 @@ while (loop):
             for row in rows:
                 writer.writerow(row)
             file.close
-    elif command == "printList":
+    elif command == "printMovies":
+        #clear console
+        os.system('cls')
         with open('movies.csv', newline='') as file:
             reader = csv.reader(file)
             #get csv header
@@ -52,5 +61,7 @@ while (loop):
             rows = []
             for row in reader:
                 rows.append(row)
-            print(rows)
+                print(row[0] + " was Directed by " + row[1] + " and was released in " + row[2] + "\n")
             file.close
+    else:
+        print("Please enter a valid command. The commands for this programds are 'addMovie', 'printMovies' and 'exit'")
