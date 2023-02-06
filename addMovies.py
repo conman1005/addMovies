@@ -1,6 +1,6 @@
 #Authors: Conner Cullity and Matthias Mcnulty
 #Date: 2023/02/05
-#Purpose: Read and write to a csv file
+#Purpose: Read, Write and Search in a csv file
 
 #import csv for reader
 import csv
@@ -26,6 +26,7 @@ with open('movies.csv', newline='') as file:
 
 #loop program
 loop = True
+print("The commands for this program are 'addMovie', 'printMovies', 'searchMovie' and 'exit'\n")
 while (loop):
     #Prompt for command
     command = input("Enter Command: ")
@@ -63,5 +64,21 @@ while (loop):
                 rows.append(row)
                 print(row[0] + " was Directed by " + row[1] + " and was released in " + row[2] + "\n")
             file.close
+    elif command == "searchMovie":
+        #clear console
+        os.system('cls')
+        #prompt for movie title
+        search = input("Enter Movie Title to Search: ")
+        #boolean to let user know if the search found anything
+        found = False
+        #loop through each row and check if the title equals the search phrase.
+        for row in rows:
+            if row[0].lower() == search.lower():
+                #if the search phrase equals any title than the details will be printed.
+                print("\n" + row[0] + " was Directed by " + row[1] + " and was released in " + row[2] + "\n")
+                found = True
+        if found == False:
+            print("There is no movie in the database with the name " + search  + ", you can use the 'addMovie' command to add it.\n")
     else:
-        print("Please enter a valid command. The commands for this programds are 'addMovie', 'printMovies' and 'exit'")
+        os.system('cls')
+        print("Please enter a valid command. The commands for this program are 'addMovie', 'printMovies', 'searchMovie' and 'exit'\n")
