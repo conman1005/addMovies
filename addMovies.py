@@ -26,7 +26,7 @@ with open('movies.csv', newline='') as file:
 
 #loop program
 loop = True
-print("The commands for this program are 'addMovie', 'printMovies', 'searchMovie' and 'exit'\n")
+print("The commands for this program are 'addMovie', 'printMovies', 'searchMovie', 'removeMovie' and 'exit'\n")
 while (loop):
     #Prompt for command
     command = input("Enter Command: ")
@@ -94,6 +94,33 @@ while (loop):
                 found = True
         if found == False:
             print("There is no movie in the database with the name " + search  + ", you can use the 'addMovie' command to add it.\n")
+    elif command == "removeMovie":
+        #get movie title of movie to remove
+        removeMovie = input("Please enter the Title of the Movie you want to remove. Case Sensitive: ")
+        found = False
+        #loop through movie rows
+        for r in rows:
+            #check if movie title is equal to search
+            if (removeMovie == r[0]):
+                found = True
+                #prompts for confirmation to remove
+                confirmation = input("Are you sure you want to remove " + removeMovie + "? Enter 'y' to remove it or anything else to cancel: ")
+                if confirmation == "y":
+                    #remove the movie from list
+                    rows.remove(row)
+                    #rewrite csv
+                    with open('movies.csv', 'w', newline='') as file:
+                        writer = csv.writer(file)
+                        writer.writerow(["title","director","year"])
+                        for row in rows:
+                            writer.writerow(row)
+                        file.close
+                else:
+                    #print this if cancelled
+                    print("Movie Removal Cancelled.\n")
+        if found == False:
+            print("There is no movie by that name.\n")
     else:
+        #Prompts for a valid command if invalid command is typed
         os.system('cls')
-        print("Please enter a valid command. The commands for this program are 'addMovie', 'printMovies', 'searchMovie' and 'exit'\n")
+        print("Please enter a valid command. The commands for this program are 'addMovie', 'printMovies', 'searchMovie', 'removeMovie' and 'exit'\n")
