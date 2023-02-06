@@ -39,7 +39,22 @@ while (loop):
         #Prompt for new movie details
         newName = input("Type movie name to Add: ")
         newDirector = input("Type the Director for " + newName + ": ")
-        newYear = input("Pleas enter the release year: ")
+        isNumber = False
+        newYear=""
+        #loop for number input
+        while isNumber == False:
+            #prompt for movie year
+            newYear = input("Please enter the release year: ")
+            try :
+                #checks if string can be converted to integer, no need to actually convert to integer
+                int(newYear)
+                #if the error doesn't happen, you get to this part, setting inNumber to True and ending loop
+                isNumber = True
+                print("\nMovie Successfully added.\n")
+            except ValueError :
+                #Prompts for proper input if input ins't a number
+                print("Please enter a Number for the Year.\n")
+
         #append new data
         rows.append([newName,newDirector,newYear])
 
