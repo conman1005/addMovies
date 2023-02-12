@@ -35,8 +35,16 @@ def add_book():
             #Prompts for proper input if input ins't a number
             print("Try again, please enter a Number for the Year.\n")
 
-    #append new data
+        #append new data
         rows.append([newTitle,newAuthor,newYear])
+        #open book_list.csv
+        with open('book_list.csv', 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(["title","author","year"])
+            #write each row in list to 
+            for row in rows:
+                writer.writerow(row)
+            file.close
 
 # This function will print the entire contents of a reading list savded to a .csv file
 def print_books():
@@ -52,9 +60,9 @@ def print_books():
             #get rows
             rows = []
             for row in reader:
-                    rows.append(row)
-                    print(row[0] + " was written by " + row[1] + " and was released in " + row[2] + "\n")
-                    file.close
+                rows.append(row)
+                print(row[0] + " was written by " + row[1] + " and was released in " + row[2] + "\n")
+                file.close
 
 # This function allows the user to input the title of a book to be searched. The 
 #   corresponding book information will be printed(title, author, year)
@@ -74,11 +82,6 @@ def search_books():
             found = True
     if found == False:
         print("There is no book in the database with the name " + search  + ", you can use the 'add book' command to add it.\n")
-
-    else:
-        os.system('cls')
-        print("Please enter a valid command. The commands for this program are 'add book', 'printbooks', 'searchbooks' and 'exit'\n")
-
 
 # ~ Main Program ~
 
