@@ -14,9 +14,8 @@ rows = []
 
 # This function will prompt the user for input and append the information to a .csv file 
 def add_book():
-    
-    #clear console - omit?
-    # os.system('cls')
+    #clear consolesad
+    os.system('cls')
 
     #Prompt for new book details
     newTitle = input("Type book title to add: ")
