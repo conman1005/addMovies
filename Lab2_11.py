@@ -7,10 +7,10 @@ import csv
 #import os to enable clearing of the console
 import os
 
+
 # Functions!
 
-# This function will prompt the user for input and append the information to a 
-#   .csv file 
+# This function will prompt the user for input and append the information to a .csv file 
 def add_book():
     
     #clear console - omit?
@@ -55,6 +55,7 @@ def print_books():
                     rows.append(row)
                     print(row[0] + " was written by " + row[1] + " and was released in " + row[2] + "\n")
                     file.close
+
 # This function allows the user to input the title of a book to be searched. The 
 #   corresponding book information will be printed(title, author, year)
 def search_books():
@@ -79,7 +80,7 @@ def search_books():
         print("Please enter a valid command. The commands for this program are 'add book', 'printbooks', 'searchbooks' and 'exit'\n")
 
 
-
+# ~ Main Program ~
 
 # omit ? - initially clear console to get rid of top text from program opening
 # os.system('cls')
@@ -98,33 +99,50 @@ with open('book_list.csv', newline='') as file:
         rows.append(row)
     file.close
 
-# main program
+# This welcome message signals the start of the progam
 print('Welcome to the program!\n')
 
+# Allow the user to select program options from a menu, allow user to perform multiple 
+#   options, without restarting the program 
+
+# This loop begins after greeting the user. It allows menu choices to be 
+    # made without the user starting the program over each time.
+
+    # Functions are utilized to reduce program length and promote modularity within the code. 
 program_active = True
 while program_active:
 
+    # Loop to obtain the commands of the program and prevent alternative input
+    #   (add book, print books, search books, exit)
     menu_sub_program = True
     while menu_sub_program:
 
         print("The commands are: 'add book', 'print books', 'search books' and 'exit'")
 
+        # variable to be used for sub menu
         menu_command = input('please enter one of the above commands: ')
-        
+
+        # Prepare for user input via add book function
         if menu_command == ('add book'):
             menu_sub_program = False
             add_book()
 
+        # Activate the print_books function to display the reading list to user
         elif menu_command == ('print books'):
             menu_sub_program = False
             print_books()
-        
+            
+        # Allow user to search for a book title
         elif menu_command == ('search books'):
             menu_sub_program = False
             search_books()
 
+        # Prepare for user input via add book function
+        
         elif menu_command == ('exit'):
+            # leave the program sub menu 
             menu_sub_program = False
+            # End the main progam loop
             program_active = False
             
 
