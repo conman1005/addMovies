@@ -7,6 +7,9 @@ import csv
 #import os to enable clearing of the console
 import os
 
+#declair header and rows
+header = []
+rows = []
 
 # Functions!
 
@@ -83,14 +86,42 @@ def search_books():
     if found == False:
         print("There is no book in the database with the name " + search  + ", you can use the 'add book' command to add it.\n")
 
+def remove_book():
+    # clear console
+    os.system('cls')
+    #get movie title of movie to remove
+    removeBook = input("Please enter the Title of the Book you want to remove. Case Sensitive: ")
+    found = False
+    #loop through movie rows
+    for r in rows:
+        #check if movie title is equal to search
+        if (removeBook == r[0]):
+            found = True
+            #prompts for confirmation to remove
+            confirmation = input("Are you sure you want to remove " + removeBook + "? Enter 'y' to remove it or anything else to cancel: ")
+            if confirmation == "y":
+                #remove the movie from list
+                rows.remove(r)
+                #rewrite csv
+                with open('book_list.csv', 'w', newline='') as file:
+                    writer = csv.writer(file)
+                    writer.writerow(["title","director","year"])
+                    for row in rows:
+                        writer.writerow(row)
+                    file.close
+            else:
+                #print this if cancelled
+                print("Book Removal Cancelled.\n")
+    if found == False:
+        print("There is no movie by that name.\n")
+
 # ~ Main Program ~
 
 # omit ? - initially clear console to get rid of top text from program opening
 # os.system('cls')
 
 #initially read file
-header = []
-rows = []
+
 with open('book_list.csv', newline='') as file:
     reader = csv.reader(file)
     #get csv header
@@ -120,7 +151,7 @@ while program_active:
     menu_sub_program = True
     while menu_sub_program:
 
-        print("The commands are: 'add book', 'print books', 'search books' and 'exit'")
+        print("The commands are: 'add book', 'print books', 'search books', 'remove book' and 'exit'")
 
         # variable to be used for sub menu
         menu_command = input('please enter one of the above commands: ')
@@ -140,6 +171,11 @@ while program_active:
             menu_sub_program = False
             search_books()
 
+        # Allow user to search for a book title
+        elif menu_command == ('remove book'):
+            menu_sub_program = False
+            remove_book()
+
         # Prepare for user input via add book function
         
         elif menu_command == ('exit'):
@@ -148,5 +184,9 @@ while program_active:
             # End the main progam loop
             program_active = False
             
+        #prompt user for valid command
 
-
+        else:
+            # clear console
+            os.system('cls')
+            print("Please enter a valid command...\n")
