@@ -63,7 +63,7 @@ def print_books():
             for row in reader:
                 rows.append(row)
                 print(row[0] + " was written by " + row[1] + " and was released in " + row[2] + "\n")
-                file.close
+            file.close
 
 # This function allows the user to input the title of a book to be searched. The 
 #   corresponding book information will be printed(title, author, year)
