@@ -35,17 +35,17 @@ def add_book():
         except ValueError :
             #Prompts for proper input if input ins't a number
             print("Try again, please enter a Number for the Year.\n")
-
-        #append new data
-        rows.append([newTitle,newAuthor,newYear])
-        #open book_list.csv
-        with open('book_list.csv', 'w', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow(["title","author","year"])
-            #write each row in list to 
-            for row in rows:
-                writer.writerow(row)
-            file.close
+    
+    #append new data
+    rows.append([newTitle,newAuthor,newYear])
+    #open book_list.csv
+    with open('book_list.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["title","author","year"])
+        #write each row in list to 
+        for row in rows:
+            writer.writerow(row)
+        file.close
 
 # This function will print the entire contents of a reading list savded to a .csv file
 def print_books():
